@@ -23,3 +23,17 @@
   <img src="https://img.shields.io/badge/Responsive-Yes-success?style=flat-square" />
   <img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" />
 </p>
+
+## 🎥 Portfolio Preview
+
+Experience a quick walkthrough of the portfolio, highlighting the user interface, animations, featured projects, technical skills, and responsive design.
+
+<p align="center">
+  <a href="./assets/preview/portfolio-demo.mp4">
+    <img src="./assets/preview/portfolio-preview.gif" alt="Aditya Portfolio Preview" width="100%">
+  </a>
+</p>
+
+<p align="center">
+  <i>💡 Click the preview above to watch the full portfolio demo.</i>
+</p>
