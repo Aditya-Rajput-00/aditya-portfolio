@@ -29,13 +29,20 @@
 Experience a quick walkthrough of my portfolio website, showcasing the user interface, animations, featured projects, technical skills, and responsive design.
 
 <p align="center">
-  <a href="./assets/preview/portfolio-demo.mp4">
-    <img src="./assets/preview/portfolio-thumbnail.png"
-         alt="Watch Portfolio Demo"
-         width="100%">
-  </a>
+  <img
+    src="./assets/preview/portfolio-preview.gif"
+    alt="Portfolio Demo"
+    width="100%"
+  />
 </p>
 
 <p align="center">
-  <b>▶️ Click the image above to watch the full portfolio walkthrough.</b>
+  <b>🎬 19-second preview of my portfolio website.</b><br>
+  <i>For the full interactive experience, visit the live portfolio below.</i>
+</p>
+
+<p align="center">
+  <a href="https://aditya-datascience-portfolio.netlify.app/">
+    🌐 <strong>Open Live Portfolio</strong>
+  </a>
 </p>
