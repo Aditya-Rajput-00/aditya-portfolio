@@ -26,14 +26,16 @@
 
 ## 🎥 Portfolio Preview
 
-Experience a quick walkthrough of the portfolio, highlighting the user interface, animations, featured projects, technical skills, and responsive design.
+Experience a quick walkthrough of my portfolio website, showcasing the user interface, animations, featured projects, technical skills, and responsive design.
 
 <p align="center">
   <a href="./assets/preview/portfolio-demo.mp4">
-    <img src="./assets/preview/portfolio-preview.gif" alt="Aditya Portfolio Preview" width="100%">
+    <img src="./assets/preview/portfolio-thumbnail.png"
+         alt="Watch Portfolio Demo"
+         width="100%">
   </a>
 </p>
 
 <p align="center">
-  <i>💡 Click the preview above to watch the full portfolio demo.</i>
+  <b>▶️ Click the image above to watch the full portfolio walkthrough.</b>
 </p>
