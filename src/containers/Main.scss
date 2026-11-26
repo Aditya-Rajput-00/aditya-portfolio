@@ -5,3 +5,46 @@
   color: white;
   transition: "0.1s";
 }
+
+#root > div > .dark-mode {
+  display: flow-root;
+  min-height: 100vh;
+}
+
+.dark-mode .blog-container,
+.dark-mode .certificate-card,
+.dark-mode .experience-card-dark,
+.dark-mode .dark-card-mode,
+.dark-mode .rectangle,
+.dark-mode .square {
+  background: $darkCardBackground;
+}
+
+.dark-mode .blog-container {
+  color: $textColorDark;
+}
+
+.dark-mode .meter {
+  background-color: #202631;
+}
+
+.dark-mode .subTitle {
+  color: #b8c0cd !important;
+}
+
+.dark-mode .greeting-text,
+.dark-mode .education-text-subHeader,
+.dark-mode .education-text-duration,
+.dark-mode .card-title,
+.dark-mode .repo-name {
+  color: $textColorDark !important;
+}
+
+.dark-mode .card-subtitle {
+  color: #c4cbd5 !important;
+}
+
+.dark-mode .contact-detail:hover,
+.dark-mode .contact-detail-email:hover {
+  color: $textColorDark;
+}

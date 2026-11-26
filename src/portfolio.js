@@ -23,7 +23,7 @@ const greeting = {
   username: "Aditya Singh",
   title: "Hi all, I'm Aditya",
   subTitle: emoji(
-    "Data Science Enthusiast focused on Analytics, Machine Learning, AI, and Automation. Building data-driven solutions using Python, SQL, Power BI, and modern AI tools."
+    "Data Science student focused on Data Analytics, Data Science, AI and Machine Learning, Deep Learning, and Automation. I also build full-stack applications, combining Python, SQL, and Power BI with React, Node.js, and MongoDB."
   ),
   resumeLink:
     "/resume.pdf", // Set to empty to hide the button
@@ -46,13 +46,16 @@ const socialMediaLinks = {
 
 const skillsSection = {
   title: "What I do",
-  subTitle: "ASPIRING DATA SCIENTIST FOCUSED ON ANALYZING DATA, BUILDING MACHINE LEARNING MODELS, AND DEVELOPING AI-POWERED SOLUTIONS",
+  subTitle: "DATA ANALYTICS, DATA SCIENCE, AI/ML, AUTOMATION, AND FULL-STACK APPLICATION DEVELOPMENT",
   skills: [
-    emoji("⚡ Analyze and clean datasets using Python, Pandas, and NumPy"),
-    emoji("⚡ Build Machine Learning models for prediction and classification"),
-    emoji("⚡ Write SQL queries for data extraction, transformation, and analysis"),
-    emoji("⚡ Create dashboards and visualizations using Power BI"),
-    emoji("⚡ Develop AI-powered applications using Python and Streamlit")
+    emoji("\u26A1 Programming Languages: Python, SQL, R, C, JavaScript"),
+    emoji("\u26A1 Data Analytics & Business Intelligence: Power BI, Microsoft Excel, DAX, Power Query"),
+    emoji("\u26A1 Data Science & Processing: Pandas, NumPy, Exploratory Data Analysis, Feature Engineering"),
+    emoji("\u26A1 AI & Machine Learning: Machine Learning, Deep Learning, Natural Language Processing, Scikit-learn, TensorFlow, PyTorch, Large Language Models"),
+    emoji("\u26A1 Frontend Development: HTML, CSS, React, Vite"),
+    emoji("\u26A1 Backend Development: Node.js, Express.js, REST API Development"),
+    emoji("\u26A1 Databases: MongoDB, Mongoose, MySQL"),
+    emoji("\u26A1 Tools & Platforms: Git, GitHub, VS Code, Jupyter Notebook, Google Colab, Streamlit, n8n")
   ],
   /* Make Sure to include correct Font Awesome Classname to view your icon
 https://fontawesome.com/icons?d=gallery */
@@ -61,6 +64,18 @@ https://fontawesome.com/icons?d=gallery */
     {
       skillName: "Python",
       fontAwesomeClassname: "fab fa-python"
+    },
+    {
+      skillName: "C",
+      fontAwesomeClassname: "fas fa-code"
+    },
+    {
+      skillName: "JavaScript",
+      fontAwesomeClassname: "fab fa-js-square"
+    },
+    {
+      skillName: "React",
+      fontAwesomeClassname: "fab fa-react"
     },
     {
       skillName: "SQL",
@@ -99,12 +114,40 @@ https://fontawesome.com/icons?d=gallery */
       fontAwesomeClassname: "fas fa-chart-line"
     },
     {
+      skillName: "Node.js",
+      fontAwesomeClassname: "fab fa-node-js"
+    },
+    {
+      skillName: "Express.js",
+      fontAwesomeClassname: "fas fa-server"
+    },
+    {
+      skillName: "MongoDB",
+      fontAwesomeClassname: "fas fa-leaf"
+    },
+    {
+      skillName: "MySQL",
+      fontAwesomeClassname: "fas fa-database"
+    },
+    {
+      skillName: "TensorFlow",
+      fontAwesomeClassname: "fas fa-project-diagram"
+    },
+    {
+      skillName: "PyTorch",
+      fontAwesomeClassname: "fas fa-fire"
+    },
+    {
       skillName: "n8n",
       fontAwesomeClassname: "fas fa-robot"
     },
     {
       skillName: "HTML",
       fontAwesomeClassname: "fab fa-html5"
+    },
+    {
+      skillName: "Git",
+      fontAwesomeClassname: "fab fa-git-alt"
     },
     {
       skillName: "GitHub",
@@ -173,6 +216,26 @@ const techStack = {
     {
       Stack: "n8n",
       progressPercentage: "60%"
+    },
+    {
+      Stack: "MongoDB",
+      progressPercentage: "50%"
+    },
+    {
+      Stack: "React",
+      progressPercentage: "30%"
+    },
+    {
+      Stack: "Node.js",
+      progressPercentage: "40%"
+    },
+    {
+      Stack: "Mongoose",
+      progressPercentage: "50%"
+    },
+    {
+      Stack: "JavaScript",
+      progressPercentage: "40%"
     }
   ],
   displayCodersrank: false // Set true to display codersrank badges section need to changes your username in src/containers/skillProgress/skillProgress.js:17:62, defaults to false
@@ -226,6 +289,21 @@ const bigProjects = {
   subtitle: "Real-World Data Science, Analytics & AI Projects",
   projects: [
     {
+      image: require("./assets/images/campusFind.png"),
+      projectName: "CampusFind",
+      projectDesc: "Responsive campus lost-and-found platform for reporting, browsing, and filtering items, submitting claims, tracking matches, receiving notifications, and viewing dashboard statistics. Includes user authentication and authorization; built with React 19, Vite 8, Node.js, Express 5, MongoDB, Mongoose, Axios, REST APIs, and JWT.",
+      footerLink: [
+        {
+          name: "GitHub",
+          url: "https://github.com/Aditya-Rajput-00/CampusFind"
+        },
+        {
+          name: "Live Demo",
+          url: "https://campus-find-qx9y.vercel.app/"
+        }
+      ]
+    },
+    {
       image: require("./assets/images/smartCityDashboard.png"),
       projectName: "Smart City Dashboard",
       projectDesc: "Interactive Power BI dashboard for smart city analytics including crime, traffic, air quality, and population insights.",
@@ -266,21 +344,6 @@ const bigProjects = {
           url: "https://github.com/Aditya-Rajput-00/telegram-restaurant-chatbot"
         }]
     },
-    {
-      image: require("./assets/images/campusFind.png"),
-      projectName: "CampusFind",
-      projectDesc: "Full-stack campus lost-and-found app for reporting items, managing claims, matching listings, notifications, authentication, and dashboards. Built with React 19, Vite 8, Node.js, Express 5, MongoDB, and Mongoose.",
-      footerLink: [
-        {
-          name: "GitHub",
-          url: "https://github.com/Aditya-Rajput-00/CampusFind"
-        },
-        {
-          name: "Live Demo",
-          url: "https://campus-find-qx9y.vercel.app/"
-        }
-      ]
-    }
   ],
   display: true // Set false to hide this section, defaults to true
 };

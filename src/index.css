@@ -6,12 +6,12 @@
     url("./assets/fonts/Agustina.woff") format("woff");
   font-display: swap;
 }
-@font-face {
-  font-family: "Montserrat";
-  src: local("Montserrat"),
-    url("./assets/fonts/Montserrat-Regular.ttf") format("woff");
-  font-display: swap;
+:root {
+  --font-heading: "Syne", sans-serif;
+  --font-body: "Figtree", sans-serif;
+  --font-label: "Azeret Mono", monospace;
 }
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -22,9 +22,33 @@ body {
 }
 body {
   margin: 0;
-  font: 19px / 23px Montserrat, "Montserrat", sans-serif;
+  font: 19px / 23px var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
+.featured-projects-kicker,
+.featured-project-number,
+.featured-project-controls p,
+.greeting-profile-badge,
+.certificate-tag {
+  font-family: var(--font-label);
 }
 /* Media Query */
 @media (max-width: 1380px) {
@@ -32,5 +56,22 @@ body {
   body {
     font-size: rem;
     line-height: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html,
+  body {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }

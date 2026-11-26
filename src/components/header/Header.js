@@ -69,13 +69,10 @@ function Header() {
           <li>
             <a href="#top">About</a>
           </li>
-          <li>
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a>
-              <ToggleSwitch />
-            </a>
-          </li>
         </ul>
+        <div className="theme-toggle">
+          <ToggleSwitch />
+        </div>
       </header>
     </Headroom>
   );

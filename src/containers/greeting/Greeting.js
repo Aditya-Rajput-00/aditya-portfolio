@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Fade } from "react-reveal";
 import emoji from "react-easy-emoji";
 import "./Greeting.scss";
@@ -8,13 +8,43 @@ import SocialMedia from "../../components/socialMedia/SocialMedia";
 import Button from "../../components/button/Button";
 import { illustration, greeting } from "../../portfolio";
 import StyleContext from "../../contexts/StyleContext";
-import dataAnalystResume from "./data-analyst-resume.pdf";
-import aiMlResume from "./ai-ml-resume.pdf";
 import { FaChartBar, FaRobot, FaArrowRight } from "react-icons/fa";
 
 export default function Greeting() {
   const { isDark } = useContext(StyleContext);
   const [showResumeModal, setShowResumeModal] = useState(false);
+  const resumeTriggerRef = useRef(null);
+  const closeButtonRef = useRef(null);
+  const resumeModalWasOpenRef = useRef(false);
+
+  useEffect(() => {
+    if (!showResumeModal) {
+      if (resumeModalWasOpenRef.current && resumeTriggerRef.current) {
+        resumeTriggerRef.current.focus();
+      }
+      resumeModalWasOpenRef.current = false;
+      return undefined;
+    }
+
+    resumeModalWasOpenRef.current = true;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const handleKeyDown = event => {
+      if (event.key === "Escape") {
+        setShowResumeModal(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    if (closeButtonRef.current) {
+      closeButtonRef.current.focus();
+    }
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [showResumeModal]);
 
   const closeResumeModal = () => {
     setShowResumeModal(false);
@@ -60,15 +90,23 @@ export default function Greeting() {
                 <div id="resume" className="empty-div"></div>
                 <SocialMedia />
                 <div className="button-greeting-div">
-                  <Button text="Contact me" href="#contact" />
-
-                  <Button
-                    text="My Resume"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setShowResumeModal(true);
-                    }}
-                  />
+                  <Button text="Contact Me" href="#contact" />
+                  <div>
+                    <a
+                      ref={resumeTriggerRef}
+                      className="main-button"
+                      href={greeting.resumeLink}
+                      aria-haspopup="dialog"
+                      aria-expanded={showResumeModal}
+                      aria-controls="resume-modal-title"
+                      onClick={event => {
+                        event.preventDefault();
+                        setShowResumeModal(true);
+                      }}
+                    >
+                      My Resume
+                    </a>
+                  </div>
 
                 </div>
               </div>
@@ -87,41 +125,49 @@ export default function Greeting() {
           </div>
         </div>
         {showResumeModal && (
-          <div className="resume-modal-overlay" onClick={closeResumeModal}>
-  <div
-    className="resume-modal"
-    onClick={(e) => e.stopPropagation()}
-  >
-    <button className="close-modal" onClick={closeResumeModal}>
-      ✕
-    </button>
-
-    <div className="resume-header">
-      <h2>📄 My Resume</h2>
-      <p>Which role are you hiring for?</p>
-    </div>
-
-    <a
-      href={dataAnalystResume}
-      target="_blank"
-      rel="noreferrer"
-      className="resume-option"
-    >
-      <span>📊 Data Analyst</span>
-      <span className="arrow">→</span>
-    </a>
-
-    <a
-      href={aiMlResume}
-      target="_blank"
-      rel="noreferrer"
-      className="resume-option"
-    >
-      <span>🤖 AI / ML</span>
-      <span className="arrow">→</span>
-    </a>
-  </div>
-</div>
+          <div
+            className="resume-modal-overlay"
+            onClick={closeResumeModal}
+            role="presentation"
+          >
+            <section
+              className="resume-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="resume-modal-title"
+              onClick={event => event.stopPropagation()}
+            >
+              <div className="resume-header">
+                <div>
+                  <h2 id="resume-modal-title">My Resume</h2>
+                  <p>Preview or download my resume.</p>
+                </div>
+                <div className="resume-modal-actions">
+                  <a
+                    className="resume-download"
+                    href={greeting.resumeLink}
+                    download="Aditya-Singh-Resume.pdf"
+                  >
+                    Download PDF
+                  </a>
+                  <button
+                    ref={closeButtonRef}
+                    className="close-modal"
+                    type="button"
+                    onClick={closeResumeModal}
+                    aria-label="Close resume preview"
+                  >
+                    ×
+                  </button>
+                </div>
+              </div>
+              <iframe
+                className="resume-preview"
+                src={greeting.resumeLink + "#view=FitH"}
+                title="Aditya Singh resume preview"
+              />
+            </section>
+          </div>
         )}
       </div>
     </Fade>

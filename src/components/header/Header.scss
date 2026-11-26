@@ -1,30 +1,26 @@
 @import "../../_globalColor";
 
-/*React-headroom*/
+/* React Headroom */
 .headroom-wrapper {
   max-height: 100px;
 }
 
-/* header */
-
-.dark-menu {
-  background-color: $darkBackground !important;
+/* Header layout */
+.header {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-areas: "brand menu toggle";
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  max-width: 1320px;
+  margin: 10px auto;
+  padding: 5px 12px;
   color: $textColorDark;
 }
 
-.dark-menu li a {
-  color: $textColorDark !important;
-}
-
-.dark-menu li a:hover {
-  background-color: $buttonColor !important;
-}
-
-.header {
-  background-color: $lightBackground1;
-  max-width: 100%;
-  padding: 15px 20px;
-  margin: 0px auto;
+.header.dark-menu {
+  color: $textColorDark;
 }
 
 .header ul {
@@ -34,33 +30,41 @@
   overflow: hidden;
 }
 
-.grey-color {
-  color: $subTitle;
+.header .menu {
+  grid-area: menu;
+  background-color: rgba(12, 15, 20, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 999px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
 }
 
-.header li a {
-  display: block;
-  padding: 15px 20px;
-  color: $textColor;
-  text-decoration: none;
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .header .menu {
+    background-color: rgba(12, 15, 20, 0.97);
+  }
 }
 
-.header li a:hover,
-.header .menu-btn:hover {
-  background-color: $headerHoverBG;
+.header.dark-menu .menu {
+  color: $textColorDark;
 }
 
 .header .logo {
+  grid-area: brand;
   display: block;
+  float: none;
   flex: none;
-  float: left;
-  font-size: 1.5em;
+  margin: 0;
+  padding: 10px 8px;
+  color: #fff;
   text-decoration: none;
-  margin-top: 10px;
-  line-height: normal;
+  white-space: nowrap;
 }
 
 .header .logo-name {
+  color: #fff;
   font-family: "Agustina Regular";
   font-weight: bold;
   font-variant-ligatures: no-common-ligatures;
@@ -68,12 +72,62 @@
   padding: 0 10px;
 }
 
-/* menu */
+.header .theme-toggle {
+  grid-area: toggle;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+}
+
+.header .menu-icon {
+  grid-area: menu-icon;
+}
 
 .header .menu {
-  clear: both;
   max-height: 0;
   transition: max-height 0.2s ease-out;
+}
+
+.grey-color {
+  color: $subTitle;
+}
+
+.header li a {
+  display: block;
+  padding: 11px 15px;
+  color: $textColorDark;
+  text-decoration: none;
+  border-radius: 999px;
+  transition: background-color 160ms ease, color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.header li a:hover,
+.header .menu-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.header li a:active {
+  background-color: rgba(255, 255, 255, 0.17);
+}
+
+.header a:focus-visible,
+.header .menu-icon:focus-visible,
+.header input[type="checkbox"]:focus-visible + .slider {
+  outline: 2px solid #8ab4ff;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(138, 180, 255, 0.2);
+}
+
+.header .switch {
+  display: block;
+  margin: 0 4px;
+}
+
+.header .menu {
+  /* The glass background and border are applied to the link bar above. */
+  clear: none;
 }
 
 /* menu icon */
@@ -81,14 +135,15 @@
 .header .menu-icon {
   cursor: pointer;
   display: inline-block;
-  float: right;
-  padding: 28px 20px;
+  float: none;
+  padding: 20px 12px;
   position: relative;
   user-select: none;
+  border-radius: 999px;
 }
 
 .header .menu-icon .navicon {
-  background: $iconBackground;
+  background: $textColorDark;
   display: block;
   height: 2px;
   position: relative;
@@ -96,24 +151,9 @@
   width: 18px;
 }
 
-.header .menu-icon .navicon-dark {
-  background: $textColorDark;
-}
-
 .header .menu-icon .navicon:before,
 .header .menu-icon .navicon:after {
-  background: $iconBackground;
-  content: "";
-  display: block;
-  height: 100%;
-  position: absolute;
-  transition: all 0.2s ease-out;
-  width: 100%;
-}
-
-.header .menu-icon .navicon-dark:before,
-.header .menu-icon .navicon-dark:after {
-  background: $textColorDark !important;
+  background: $textColorDark;
   content: "";
   display: block;
   height: 100%;
@@ -130,10 +170,23 @@
   top: -5px;
 }
 
-/* menu btn */
-
 .header .menu-btn {
-  display: none;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+  border: 0;
+}
+
+.header .menu-btn:focus-visible ~ .menu-icon {
+  outline: 2px solid #8ab4ff;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(138, 180, 255, 0.2);
 }
 
 .header .menu-btn:checked ~ .menu {
@@ -141,7 +194,7 @@
 }
 
 .header .menu-btn:checked ~ .menu-icon .navicon {
-  background: transparent !important;
+  background: transparent;
 }
 
 .header .menu-btn:checked ~ .menu-icon .navicon:before {
@@ -161,22 +214,74 @@
 
 @media (min-width: 48em) {
   .header li {
-    float: left;
-  }
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    float: none;
   }
   .header .menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
     max-height: none;
+    padding: 3px;
   }
   .header .menu-icon {
     display: none;
   }
+  .header .menu-btn {
+    display: none;
+  }
 }
+
 @media (max-width: 960px) and (min-width: 768px) {
   .header {
     font-size: 12px;
+  }
+}
+
+@media (max-width: 767px) {
+  .header {
+    grid-template-areas:
+      "brand menu-icon toggle"
+      "menu menu menu";
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    margin: 8px 12px;
+    padding: 3px 8px;
+  }
+
+  .header .menu {
+    width: 100%;
+    max-height: 0;
+    padding: 0;
+    overflow: hidden;
+    border-color: transparent;
+    box-shadow: none;
+    background-color: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    transition: max-height 0.2s ease-out;
+  }
+
+  .header .menu li a {
+    padding: 12px 14px;
+  }
+
+  .header .menu-icon {
+    padding: 16px 12px;
+  }
+
+  .header .theme-toggle {
+    padding: 0 8px;
+  }
+
+  .header .menu-btn:checked ~ .menu {
+    max-height: 400px;
+    padding: 6px;
+    border-color: rgba(255, 255, 255, 0.13);
+    border-radius: 20px;
+    background-color: rgba(12, 15, 20, 0.94);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.24),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
   }
 }
