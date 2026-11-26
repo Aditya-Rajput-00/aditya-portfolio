@@ -257,7 +257,7 @@ const bigProjects = {
       ]
     },
     {
-      image: require("./assets/images/Telegram_chart.jpeg"),
+      image: require("./assets/images/Telegram_chart.png"),
       projectName: "Telegram Restaurant Chatbot",
       projectDesc: "Telegram chatbot for restaurant queries, reservations, and automated email notifications using workflow automation.",
       footerLink: [
@@ -265,6 +265,21 @@ const bigProjects = {
           name: "💻 GitHub",
           url: "https://github.com/Aditya-Rajput-00/telegram-restaurant-chatbot"
         }]
+    },
+    {
+      image: require("./assets/images/campusFind.png"),
+      projectName: "CampusFind",
+      projectDesc: "Full-stack campus lost-and-found app for reporting items, managing claims, matching listings, notifications, authentication, and dashboards. Built with React 19, Vite 8, Node.js, Express 5, MongoDB, and Mongoose.",
+      footerLink: [
+        {
+          name: "GitHub",
+          url: "https://github.com/Aditya-Rajput-00/CampusFind"
+        },
+        {
+          name: "Live Demo",
+          url: "https://campus-find-qx9y.vercel.app/"
+        }
+      ]
     }
   ],
   display: true // Set false to hide this section, defaults to true
