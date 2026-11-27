@@ -2,20 +2,21 @@ import React from "react";
 import "./SocialMedia.scss";
 import {socialMediaLinks} from "../../portfolio";
 
-export default function socialMedia() {
+export default function socialMedia({className = ""}) {
   if (!socialMediaLinks.display) {
     return null;
   }
   return (
-    <div className="social-media-div">
+    <div className={`social-media-div ${className}`.trim()}>
       {socialMediaLinks.github ? (
         <a
           href={socialMediaLinks.github}
           className="icon-button github"
+          aria-label="GitHub"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <i className="fab fa-github"></i>
+          <i className="fab fa-github" aria-hidden="true"></i>
           <span></span>
         </a>
       ) : null}
@@ -24,10 +25,11 @@ export default function socialMedia() {
         <a
           href={socialMediaLinks.linkedin}
           className="icon-button linkedin"
+          aria-label="LinkedIn"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <i className="fab fa-linkedin-in"></i>
+          <i className="fab fa-linkedin-in" aria-hidden="true"></i>
           <span></span>
         </a>
       ) : null}
@@ -36,10 +38,11 @@ export default function socialMedia() {
         <a
           href={`mailto:${socialMediaLinks.gmail}`}
           className="icon-button google"
+          aria-label="Email"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <i className="fas fa-envelope"></i>
+          <i className="fas fa-envelope" aria-hidden="true"></i>
           <span></span>
         </a>
       ) : null}
@@ -48,10 +51,11 @@ export default function socialMedia() {
         <a
           href={socialMediaLinks.gitlab}
           className="icon-button gitlab"
+          aria-label="GitLab"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <i className="fab fa-gitlab"></i>
+          <i className="fab fa-gitlab" aria-hidden="true"></i>
           <span></span>
         </a>
       ) : null}
@@ -60,10 +64,11 @@ export default function socialMedia() {
         <a
           href={socialMediaLinks.facebook}
           className="icon-button facebook"
+          aria-label="Facebook"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <i className="fab fa-facebook-f"></i>
+          <i className="fab fa-facebook-f" aria-hidden="true"></i>
           <span></span>
         </a>
       ) : null}
@@ -72,10 +77,11 @@ export default function socialMedia() {
         <a
           href={socialMediaLinks.instagram}
           className="icon-button instagram"
+          aria-label="Instagram"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <i className="fab fa-instagram"></i>
+          <i className="fab fa-instagram" aria-hidden="true"></i>
           <span></span>
         </a>
       ) : null}
@@ -84,10 +90,11 @@ export default function socialMedia() {
         <a
           href={socialMediaLinks.twitter}
           className="icon-button twitter"
+          aria-label="Twitter"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <i className="fab fa-twitter"></i>
+          <i className="fab fa-twitter" aria-hidden="true"></i>
           <span></span>
         </a>
       ) : null}
@@ -96,10 +103,11 @@ export default function socialMedia() {
         <a
           href={socialMediaLinks.medium}
           className="icon-button medium"
+          aria-label="Medium"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <i className="fab fa-medium"></i>
+          <i className="fab fa-medium" aria-hidden="true"></i>
           <span></span>
         </a>
       ) : null}
@@ -108,10 +116,11 @@ export default function socialMedia() {
         <a
           href={socialMediaLinks.stackoverflow}
           className="icon-button stack-overflow"
+          aria-label="Stack Overflow"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <i className="fab fa-stack-overflow"></i>
+          <i className="fab fa-stack-overflow" aria-hidden="true"></i>
           <span></span>
         </a>
       ) : null}
@@ -120,10 +129,11 @@ export default function socialMedia() {
         <a
           href={socialMediaLinks.kaggle}
           className="icon-button kaggle"
+          aria-label="Kaggle"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <i className="fab fa-kaggle"></i>
+          <i className="fab fa-kaggle" aria-hidden="true"></i>
           <span></span>
         </a>
       ) : null}

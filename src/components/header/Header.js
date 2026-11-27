@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import Headroom from "react-headroom";
 import "./Header.scss";
-import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import StyleContext from "../../contexts/StyleContext";
+import spideyLogo from "../../assets/images/spidey-logo.png";
 import {
   greeting,
   workExperiences,
@@ -67,12 +67,10 @@ function Header() {
             <a href="#contact">Contact</a>
           </li>
           <li>
-            <a href="#top">About</a>
+            <a href="#about">About</a>
           </li>
         </ul>
-        <div className="theme-toggle">
-          <ToggleSwitch />
-        </div>
+        <img className="header-spidey-logo" src={spideyLogo} alt="Spider-Man logo" />
       </header>
     </Headroom>
   );

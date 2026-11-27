@@ -1,14 +1,10 @@
 .featured-projects-section {
   --projects-ink: #f5f6f8;
   --projects-muted: #aeb6c4;
-  --projects-background: #070a10;
   position: relative;
   overflow: hidden;
-  padding: clamp(3.5rem, 7vw, 6.5rem) clamp(1rem, 6vw, 6rem) clamp(4rem, 8vw, 7rem);
-  background:
-    radial-gradient(ellipse at 16% 36%, rgba(102, 91, 191, 0.12), transparent 46%),
-    radial-gradient(ellipse at 88% 74%, rgba(51, 125, 119, 0.1), transparent 44%),
-    var(--projects-background);
+  padding: clamp(3rem, 5.5vw, 5rem) clamp(1rem, 6vw, 6rem) clamp(3.25rem, 6vw, 5.25rem);
+  background: #050505;
   color: var(--projects-ink);
   text-align: left;
 }
