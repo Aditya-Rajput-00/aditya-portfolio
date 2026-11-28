@@ -4,20 +4,111 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
 }
 
 .splash-animation-container {
-  height: 50vh;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.spidey-logo-motion {
+  animation: spidey-logo-enter 0.9s ease-out both;
+}
+
+.spidey-logo-shell {
+  width: 125px;
+  height: 125px;
+  animation: spidey-logo-float 2.6s ease-in-out 0.9s infinite;
+}
+
+.spidey-logo-shell img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .splash-title-container {
-  font-size: 2.5rem;
-  text-decoration: none;
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
+  text-align: center;
+  margin-top: -5px;
+  padding: 0 14px;
+  animation: signature-appear 0.8s ease-out 0.25s both;
 }
+
 .splash-title {
   font-family: "Agustina Regular", cursive;
   font-weight: bold;
   font-variant-ligatures: no-common-ligatures;
   -webkit-font-variant-ligatures: no-common-ligatures;
-  padding: 0 20px;
+  padding: 0 10px;
+}
+
+.splash-title-container .grey-color {
+  color: #aaa;
+}
+
+@keyframes spidey-logo-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.5) rotate(-12deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes spidey-logo-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes signature-appear {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .splash-animation-container {
+    width: 130px;
+    height: 130px;
+  }
+
+  .spidey-logo-shell {
+    width: 110px;
+    height: 110px;
+  }
+
+  .splash-title-container {
+    font-size: 1.7rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spidey-logo-motion,
+  .spidey-logo-shell,
+  .splash-title-container {
+    animation: none !important;
+  }
 }

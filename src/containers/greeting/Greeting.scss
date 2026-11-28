@@ -26,7 +26,8 @@
 .greet-main::before {
   top: -270px;
   right: 8%;
-  box-shadow: 0 0 0 36px rgba(79, 205, 220, 0.018),
+  box-shadow:
+    0 0 0 36px rgba(79, 205, 220, 0.018),
     0 0 0 72px rgba(79, 205, 220, 0.014);
 }
 
@@ -53,25 +54,53 @@
   padding: 20px 0;
 }
 
+/* Glass Minimal Badge */
 .greeting-quote-badge {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
+  gap: 10px;
   margin-bottom: 28px;
-  padding: 8px 12px;
-  color: #a9e4eb;
-  background: rgba(39, 131, 150, 0.1);
-  border: 1px solid rgba(105, 208, 220, 0.22);
+  padding: 9px 15px;
+  color: #c5edf1;
+  background: linear-gradient(135deg,
+      rgba(19, 34, 42, 0.72),
+      rgba(10, 16, 23, 0.78));
+  border: 1px solid rgba(99, 213, 223, 0.28);
   border-radius: 999px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 5px 22px rgba(0, 0, 0, 0.18);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
   font-size: 0.68rem;
   font-weight: 650;
-  letter-spacing: 0.13em;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .greeting-quote-badge svg {
-  color: #72d4df;
-  font-size: 0.72rem;
+  display: none;
+}
+
+.greeting-quote-badge::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  flex: 0 0 7px;
+  border-radius: 50%;
+  background: #63d5df;
+  box-shadow:
+    0 0 8px rgba(99, 213, 223, 0.8),
+    0 0 16px rgba(99, 213, 223, 0.35);
+}
+
+.greeting-quote-badge:hover {
+  border-color: rgba(99, 213, 223, 0.5);
+  box-shadow:
+    0 0 20px rgba(99, 213, 223, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transform: translateY(-2px);
 }
 
 .greeting-eyebrow {
@@ -126,8 +155,11 @@
   font-family: inherit;
   cursor: pointer;
   text-decoration: none;
-  transition: color 160ms ease, border-color 160ms ease,
-    background-color 160ms ease, transform 160ms ease;
+  transition:
+    color 160ms ease,
+    border-color 160ms ease,
+    background-color 160ms ease,
+    transform 160ms ease;
 }
 
 .greeting-action svg {
@@ -157,18 +189,28 @@
 .greeting-profile-card {
   position: relative;
   overflow: hidden;
-  padding: 9px;
-  background: linear-gradient(145deg, rgba(13, 20, 46, 0.96), rgba(15, 17, 42, 0.97)) padding-box,
-    linear-gradient(145deg, rgba(89, 218, 228, 0.78), rgba(115, 103, 235, 0.72) 58%, rgba(90, 78, 183, 0.6)) border-box;
+  padding: 10px;
+  background:
+    linear-gradient(145deg,
+      rgba(24, 26, 32, 0.88),
+      rgba(8, 10, 15, 0.94)) padding-box,
+    linear-gradient(135deg,
+      rgba(255, 255, 255, 0.18),
+      rgba(255, 255, 255, 0.04)) border-box;
   border: 1px solid transparent;
   border-radius: 18px;
-  box-shadow: 0 24px 68px rgba(0, 0, 0, 0.4),
-    0 0 32px rgba(74, 91, 192, 0.12),
-    inset 0 1px 0 rgba(207, 226, 255, 0.08);
+  box-shadow:
+    0 20px 55px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
 }
 
 .greeting-profile-heading {
-  padding: 6px 6px 13px;
+  position: relative;
+  z-index: 2;
+  padding: 8px 6px 14px;
+  background: transparent;
   text-align: center;
 }
 
@@ -190,14 +232,18 @@
   position: relative;
   height: 318px;
   overflow: hidden;
-  background: radial-gradient(ellipse at 50% 56%, rgba(45, 75, 156, 0.3), rgba(19, 23, 57, 0.15) 56%, transparent 78%);
-  border-radius: 11px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
 }
 
 .greeting-profile-photo-wrap::after {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(56, 80, 166, 0.06), rgba(54, 43, 130, 0.2));
+  background: linear-gradient(180deg,
+      transparent 65%,
+      rgba(8, 10, 15, 0.12));
+  border-radius: 0;
   content: "";
   pointer-events: none;
 }
@@ -221,13 +267,14 @@
   justify-content: space-between;
   gap: 8px;
   padding: 8px;
-  background: rgba(12, 17, 37, 0.68);
-  border: 1px solid rgba(201, 216, 255, 0.18);
+  background: rgba(8, 10, 16, 0.76);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 11px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22),
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.22),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
 }
 
 .greeting-contact-identity {
@@ -253,8 +300,8 @@
   flex: 0 0 16px;
   object-fit: contain;
   opacity: 0.88;
-  filter: drop-shadow(0 0 3px rgba(112, 220, 241, 0.68))
-    drop-shadow(0 0 7px rgba(145, 116, 255, 0.42));
+  filter:
+    drop-shadow(0 0 3px rgba(112, 220, 241, 0.68)) drop-shadow(0 0 7px rgba(145, 116, 255, 0.42));
 }
 
 .greeting-contact-link {
@@ -265,23 +312,30 @@
   justify-content: center;
   padding: 0 10px;
   color: #f2f5ff;
-  background: linear-gradient(135deg, rgba(69, 107, 190, 0.58), rgba(99, 79, 176, 0.62));
+  background: linear-gradient(135deg,
+      rgba(69, 107, 190, 0.58),
+      rgba(99, 79, 176, 0.62));
   border: 1px solid rgba(194, 208, 255, 0.3);
   border-radius: 7px;
   font-size: 0.66rem;
   font-weight: 650;
   text-decoration: none;
-  transition: background-color 160ms ease, border-color 160ms ease,
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
     transform 160ms ease;
 }
 
 .greeting-contact-link:hover {
   color: #fff;
-  background: linear-gradient(135deg, rgba(78, 125, 214, 0.72), rgba(115, 91, 205, 0.76));
+  background: linear-gradient(135deg,
+      rgba(78, 125, 214, 0.72),
+      rgba(115, 91, 205, 0.76));
   border-color: rgba(216, 225, 255, 0.54);
   transform: translateY(-1px);
 }
 
+/* CV Modal */
 .cv-modal-overlay {
   position: fixed;
   z-index: 10000;
@@ -304,10 +358,13 @@
   padding: 22px;
   overflow: hidden;
   color: #eef5f8;
-  background: linear-gradient(145deg, rgba(16, 29, 39, 0.98), rgba(8, 14, 22, 0.99));
+  background: linear-gradient(145deg,
+      rgba(16, 29, 39, 0.98),
+      rgba(8, 14, 22, 0.99));
   border: 1px solid rgba(105, 204, 221, 0.34);
   border-radius: 17px;
-  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.56),
+  box-shadow:
+    0 28px 90px rgba(0, 0, 0, 0.56),
     inset 0 1px 0 rgba(207, 248, 255, 0.06);
 }
 
@@ -384,7 +441,9 @@
   border-radius: 11px;
   cursor: pointer;
   font: inherit;
-  transition: background-color 160ms ease, border-color 160ms ease,
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
     transform 160ms ease;
 }
 
@@ -425,7 +484,7 @@
   font-size: 0.78rem;
 }
 
-.cv-choice-option > svg {
+.cv-choice-option>svg {
   color: #70cfdd;
   font-size: 0.8rem;
 }
@@ -495,6 +554,7 @@
   border-radius: 9px;
 }
 
+/* Responsive CV Modal */
 @media (max-width: 560px) {
   .cv-modal-overlay {
     padding: 10px;
@@ -528,6 +588,7 @@
   }
 }
 
+/* Tablet */
 @media (max-width: 760px) {
   .greet-main {
     padding: 48px 6%;
@@ -544,14 +605,15 @@
   }
 
   .greeting-visual-column {
-    max-width: 250px;
+    max-width: 280px;
   }
 
   .greeting-profile-photo-wrap {
-    height: 240px;
+    height: 260px;
   }
 }
 
+/* Mobile */
 @media (max-width: 560px) {
   .greet-main {
     padding: 40px 22px 48px;
@@ -559,7 +621,7 @@
 
   .greeting-main {
     grid-template-columns: minmax(0, 1fr);
-    gap: 30px;
+    gap: 26px;
     width: min(100%, 390px);
   }
 
@@ -570,6 +632,8 @@
   .greeting-quote-badge {
     margin-bottom: 22px;
     font-size: 0.62rem;
+    letter-spacing: 0.09em;
+    padding: 8px 12px;
   }
 
   .greeting-text {
@@ -594,18 +658,65 @@
   }
 
   .greeting-visual-column {
-    max-width: 265px;
+    width: 100%;
+    max-width: 300px;
     justify-self: center;
   }
 
   .greeting-profile-photo-wrap {
-    height: 235px;
+    height: 265px;
   }
 }
 
+/* Accessibility */
 @media (prefers-reduced-motion: reduce) {
+
   .greeting-action,
-  .greeting-contact-link {
+  .greeting-contact-link,
+  .greeting-quote-badge {
     transition: none;
   }
+}
+
+/* Premium dark glass profile card */
+.greeting-profile-card {
+  background:
+    linear-gradient(145deg,
+      rgba(24, 26, 32, 0.88),
+      rgba(8, 10, 15, 0.94)) padding-box,
+    linear-gradient(135deg,
+      rgba(255, 255, 255, 0.18),
+      rgba(255, 255, 255, 0.04)) border-box;
+  padding: 10px;
+  overflow: hidden;
+}
+
+/* Integrate name and designation into the main card */
+.greeting-profile-heading {
+  position: relative;
+  z-index: 2;
+  padding: 8px 6px 14px;
+  background: transparent;
+}
+
+/* Remove the separate inner photo box */
+.greeting-profile-photo-wrap {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+/* Remove the separate blue overlay */
+.greeting-profile-photo-wrap::after {
+  background: linear-gradient(180deg,
+      transparent 65%,
+      rgba(8, 10, 15, 0.12));
+  border-radius: 0;
+}
+
+/* Keep the character naturally blended into the card */
+.greeting-profile-photo {
+  object-fit: cover;
+  object-position: center 24%;
 }

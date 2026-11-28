@@ -1,5 +1,10 @@
 @import "../../_globalColor";
 
+/* =========================================
+   Contact Section — Premium Dark Glass
+   Charcoal + Soft Lavender Theme
+========================================= */
+
 .contact-margin-top {
   box-sizing: border-box;
   width: min(1080px, calc(100% - 40px));
@@ -10,20 +15,32 @@
 
 .contact-div-main {
   box-sizing: border-box;
-  display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  position: relative;
+  display: flex;
   align-items: center;
-  gap: clamp(24px, 4vw, 56px);
-  padding: clamp(24px, 4vw, 44px);
-  background: linear-gradient(145deg, rgba(21, 20, 39, 0.76), rgba(11, 13, 24, 0.78));
-  border: 1px solid rgba(151, 130, 239, 0.2);
+  min-height: 350px;
+  padding: 36px 42px;
+
+  background:
+    linear-gradient(145deg,
+      rgba(24, 26, 32, 0.88),
+      rgba(8, 10, 15, 0.94)) padding-box,
+    linear-gradient(135deg,
+      rgba(255, 255, 255, 0.18),
+      rgba(255, 255, 255, 0.04)) border-box;
+
+  border: 1px solid transparent;
   border-radius: 20px;
-  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.2),
-    0 0 30px rgba(110, 83, 223, 0.06),
-    inset 0 1px 0 rgba(230, 223, 255, 0.045);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
+
+  box-shadow:
+    0 20px 55px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09);
+
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
 }
+
+/* Contact Content */
 
 .contact-header,
 .contact-text-div,
@@ -31,9 +48,15 @@
   min-width: 0;
 }
 
+.contact-header {
+  position: relative;
+  z-index: 2;
+  width: 68%;
+}
+
 .contact-title {
   margin: 0 0 12px;
-  color: #f2efff;
+  color: #F2F0FF;
   font-size: clamp(2rem, 3.5vw, 2.8rem);
   font-weight: 600;
   letter-spacing: -0.04em;
@@ -44,18 +67,20 @@
 .contact-subtitle {
   max-width: 48ch;
   margin: 0;
-  color: #b8c0cd;
+  color: #B8C0CD;
   font-size: 1rem;
   line-height: 1.65;
   text-align: left;
   text-transform: none;
 }
 
+/* Contact Details */
+
 .contact-text-div {
   display: grid;
   justify-items: start;
   gap: 10px;
-  margin-top: 22px;
+  margin-top: 20px;
 }
 
 .contact-detail,
@@ -67,43 +92,57 @@
   min-height: 42px;
   padding: 9px 13px;
   overflow-wrap: anywhere;
-  color: #e2e3ef;
+
+  color: #E2E3EF;
   background: rgba(255, 255, 255, 0.035);
-  border: 1px solid rgba(169, 157, 221, 0.14);
+  border: 1px solid rgba(192, 165, 255, 0.16);
   border-radius: 11px;
+
   font-size: 0.92rem;
   font-weight: 450;
   line-height: 1.4;
   text-decoration: none;
-  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .contact-detail i,
 .contact-detail-email i {
   flex: 0 0 16px;
   margin-right: 10px;
-  color: #a99aff;
+  color: #C5A5FF;
   font-size: 0.9rem;
   text-align: center;
 }
 
 .dark-mode .contact-div-main a {
-  color: #e2e3ef;
+  color: #E2E3EF;
 }
 
 .contact-detail:hover,
 .contact-detail-email:hover {
-  color: #ffffff;
-  background: rgba(124, 99, 231, 0.11);
-  border-color: rgba(167, 139, 250, 0.48);
+  color: #FFFFFF;
+  background: rgba(137, 91, 190, 0.12);
+  border-color: rgba(192, 165, 255, 0.48);
+  transform: translateY(-1px);
 }
+
+/* Keyboard Accessibility */
 
 .contact-detail:focus-visible,
 .contact-detail-email:focus-visible,
 .contact-social-links a:focus-visible {
-  outline: 2px solid #a78bfa;
+  outline: 2px solid #C5A5FF;
   outline-offset: 3px;
 }
+
+/* =========================================
+   Social Media Links
+========================================= */
 
 .contact-social-links {
   display: flex;
@@ -120,13 +159,19 @@
   align-items: center;
   justify-content: center;
   margin: 0;
-  color: #e2e3ef;
+
+  color: #E2E3EF;
   background: rgba(255, 255, 255, 0.045);
-  border: 1px solid rgba(169, 157, 221, 0.2);
+  border: 1px solid rgba(192, 165, 255, 0.20);
   border-radius: 12px;
+
   text-decoration: none;
-  transition: transform 0.18s ease, background-color 0.18s ease,
-    border-color 0.18s ease, color 0.18s ease;
+
+  transition:
+    transform 0.18s ease,
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease;
 }
 
 .contact-social-links .icon-button i {
@@ -138,47 +183,59 @@
   background: transparent;
   font-size: 1.1rem;
   line-height: 1;
-  transition: none;
 }
 
 .contact-social-links .icon-button:hover {
   transform: translateY(-2px);
-  color: #ffffff;
-  background: rgba(124, 99, 231, 0.2);
-  border-color: rgba(167, 139, 250, 0.58);
-}
-
-.contact-social-links .icon-button:hover i {
-  background: transparent;
+  color: #FFFFFF;
+  background: rgba(137, 91, 190, 0.16);
+  border-color: rgba(192, 165, 255, 0.55);
 }
 
 .contact-social-links .icon-button:focus-visible {
-  outline: 2px solid #a78bfa;
+  outline: 2px solid #C5A5FF;
   outline-offset: 3px;
 }
 
+/* =========================================
+   Character — Reduced Size
+========================================= */
+
 .contact-image-div {
+  position: absolute;
+  right: 28px;
+  bottom: 0;
+
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: min(100%, 410px);
-  justify-self: center;
-  opacity: 0.9;
+  align-items: flex-end;
+  justify-content: flex-end;
+
+  width: min(24%, 205px);
+  height: 230px;
+
+  opacity: 0.96;
+  pointer-events: none;
 }
 
-.contact-image-div > img,
-.contact-image-div > div {
+.contact-image-div>img {
   display: block;
   width: 100%;
-  max-width: 410px;
-  height: auto;
+  max-width: 205px;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom right;
 }
 
+.contact-image-div>div,
 .contact-image-div svg {
   display: block;
   width: 100%;
   height: auto;
 }
+
+/* =========================================
+   Responsive Layout
+========================================= */
 
 @media (max-width: 760px) {
   .contact-margin-top {
@@ -187,9 +244,14 @@
   }
 
   .contact-div-main {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 14px;
-    padding: 24px clamp(18px, 6vw, 32px) 18px;
+    flex-direction: column;
+    min-height: auto;
+    gap: 12px;
+    padding: 26px 18px 0;
+  }
+
+  .contact-header {
+    width: 100%;
   }
 
   .contact-title,
@@ -211,16 +273,27 @@
     justify-content: center;
   }
 
+  /* Smaller character on mobile */
+
   .contact-image-div {
-    width: min(100%, 260px);
-    margin: 2px auto 0;
+    position: relative;
+    right: auto;
+    bottom: auto;
+
+    width: min(100%, 165px);
+    height: 180px;
+    margin: 4px auto 0;
+
+    justify-content: center;
   }
 
-  .contact-image-div > img,
-  .contact-image-div > div {
-    max-width: 260px;
+  .contact-image-div>img {
+    max-width: 165px;
+    object-position: bottom center;
   }
 }
+
+/* Small Mobile */
 
 @media (max-width: 380px) {
   .contact-div-main {
@@ -231,5 +304,31 @@
   .contact-detail,
   .contact-detail-email {
     font-size: 0.82rem;
+  }
+
+  .contact-image-div {
+    width: min(100%, 150px);
+    height: 165px;
+  }
+
+  .contact-image-div>img {
+    max-width: 150px;
+  }
+}
+
+/* Reduced Motion Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .contact-detail,
+  .contact-detail-email,
+  .contact-social-links .icon-button {
+    transition: none;
+  }
+
+  .contact-detail:hover,
+  .contact-detail-email:hover,
+  .contact-social-links .icon-button:hover {
+    transform: none;
   }
 }

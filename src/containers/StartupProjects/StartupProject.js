@@ -1,9 +1,11 @@
-import React, {useEffect, useRef, useState} from "react";
+
+import React, { useEffect, useRef, useState } from "react";
 import "./StartupProjects.scss";
-import {bigProjects} from "../../portfolio";
+import { bigProjects } from "../../portfolio";
 
 const SWIPE_THRESHOLD = 85;
 const TRANSITION_DURATION = 300;
+const INTRO_DURATION = 1200;
 
 export default function StartupProject() {
   const [slideState, setSlideState] = useState({
@@ -11,19 +13,82 @@ export default function StartupProject() {
     exitDirection: 0,
     enterDirection: 0
   });
+
   const [dragX, setDragX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
-  const {activeIndex, exitDirection, enterDirection} = slideState;
+
+  // Scroll entrance animation state
+  const [hasEnteredViewport, setHasEnteredViewport] = useState(false);
+  const [isIntroPlaying, setIsIntroPlaying] = useState(false);
+
+  const { activeIndex, exitDirection, enterDirection } = slideState;
+
+  const sectionRef = useRef(null);
   const pointerRef = useRef(null);
   const transitioningRef = useRef(false);
+
   const transitionTimerRef = useRef(null);
   const enterTimerRef = useRef(null);
+  const introTimerRef = useRef(null);
+
   const projects = bigProjects.projects;
 
-  useEffect(() => () => {
-    window.clearTimeout(transitionTimerRef.current);
-    window.clearTimeout(enterTimerRef.current);
+  // Clean up timers when component unmounts
+  useEffect(() => {
+    return () => {
+      window.clearTimeout(transitionTimerRef.current);
+      window.clearTimeout(enterTimerRef.current);
+      window.clearTimeout(introTimerRef.current);
+    };
   }, []);
+
+  // Play the entrance animation when Projects enters the viewport
+  useEffect(() => {
+    const section = sectionRef.current;
+
+    if (!section || hasEnteredViewport) {
+      return undefined;
+    }
+
+    const prefersReducedMotion =
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (prefersReducedMotion) {
+      setHasEnteredViewport(true);
+      return undefined;
+    }
+
+    const startIntroAnimation = () => {
+      setHasEnteredViewport(true);
+      setIsIntroPlaying(true);
+
+      introTimerRef.current = window.setTimeout(() => {
+        setIsIntroPlaying(false);
+      }, INTRO_DURATION);
+    };
+
+    if (!("IntersectionObserver" in window)) {
+      startIntroAnimation();
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      entries => {
+        if (entries[0].isIntersecting) {
+          observer.disconnect();
+          startIntroAnimation();
+        }
+      },
+      {
+        threshold: 0.2
+      }
+    );
+
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, [hasEnteredViewport]);
 
   if (!bigProjects.display || projects.length === 0) {
     return null;
@@ -37,33 +102,67 @@ export default function StartupProject() {
     );
   }
 
+  function stopIntroAnimation() {
+    if (isIntroPlaying) {
+      window.clearTimeout(introTimerRef.current);
+      setIsIntroPlaying(false);
+    }
+  }
+
+  // Existing project navigation and swipe transition
   function goToProject(direction) {
     if (transitioningRef.current) {
       return;
     }
 
-    const nextIndex = (activeIndex + direction + projects.length) % projects.length;
+    stopIntroAnimation();
+
+    const nextIndex =
+      (activeIndex + direction + projects.length) % projects.length;
+
     if (prefersReducedMotion()) {
-      setSlideState({activeIndex: nextIndex, exitDirection: 0, enterDirection: 0});
+      setSlideState({
+        activeIndex: nextIndex,
+        exitDirection: 0,
+        enterDirection: 0
+      });
       setDragX(0);
       setIsDragging(false);
       return;
     }
 
     transitioningRef.current = true;
-    setSlideState({activeIndex, exitDirection: direction, enterDirection: 0});
+
+    setSlideState({
+      activeIndex,
+      exitDirection: direction,
+      enterDirection: 0
+    });
+
     setDragX(0);
     setIsDragging(false);
+
     transitionTimerRef.current = window.setTimeout(() => {
-      setSlideState({activeIndex: nextIndex, exitDirection: 0, enterDirection: direction});
+      setSlideState({
+        activeIndex: nextIndex,
+        exitDirection: 0,
+        enterDirection: direction
+      });
+
       transitioningRef.current = false;
+
       enterTimerRef.current = window.setTimeout(
-        () => setSlideState(current => ({...current, enterDirection: 0})),
+        () =>
+          setSlideState(current => ({
+            ...current,
+            enterDirection: 0
+          })),
         TRANSITION_DURATION
       );
     }, TRANSITION_DURATION);
   }
 
+  // Existing pointer and swipe handling
   function onPointerDown(event) {
     if (
       transitioningRef.current ||
@@ -73,12 +172,15 @@ export default function StartupProject() {
       return;
     }
 
+    stopIntroAnimation();
+
     pointerRef.current = {
       pointerId: event.pointerId,
       startX: event.clientX,
       startY: event.clientY,
       horizontal: false
     };
+
     if (event.currentTarget.setPointerCapture) {
       event.currentTarget.setPointerCapture(event.pointerId);
     }
@@ -86,13 +188,19 @@ export default function StartupProject() {
 
   function onPointerMove(event) {
     const pointer = pointerRef.current;
+
     if (!pointer || pointer.pointerId !== event.pointerId) {
       return;
     }
 
     const deltaX = event.clientX - pointer.startX;
     const deltaY = event.clientY - pointer.startY;
-    if (!pointer.horizontal && Math.abs(deltaY) > 10 && Math.abs(deltaY) > Math.abs(deltaX)) {
+
+    if (
+      !pointer.horizontal &&
+      Math.abs(deltaY) > 10 &&
+      Math.abs(deltaY) > Math.abs(deltaX)
+    ) {
       pointerRef.current = null;
       setDragX(0);
       setIsDragging(false);
@@ -109,13 +217,16 @@ export default function StartupProject() {
 
   function onPointerUp(event) {
     const pointer = pointerRef.current;
+
     if (!pointer || pointer.pointerId !== event.pointerId) {
       return;
     }
 
     const deltaX = event.clientX - pointer.startX;
+
     pointerRef.current = null;
     setIsDragging(false);
+
     if (pointer.horizontal && Math.abs(deltaX) >= SWIPE_THRESHOLD) {
       goToProject(deltaX < 0 ? 1 : -1);
     } else {
@@ -129,10 +240,12 @@ export default function StartupProject() {
     setIsDragging(false);
   }
 
+  // Existing keyboard navigation
   function onKeyDown(event) {
     if (event.target.closest("a, button")) {
       return;
     }
+
     if (event.key === "ArrowLeft") {
       event.preventDefault();
       goToProject(-1);
@@ -143,16 +256,28 @@ export default function StartupProject() {
   }
 
   const previewDirection = exitDirection || (dragX > 0 ? -1 : 1);
-  const previewIndex = (activeIndex + previewDirection + projects.length) % projects.length;
+
+  const previewIndex =
+    (activeIndex + previewDirection + projects.length) % projects.length;
+
   const visibleIndexes = [previewIndex, activeIndex];
 
   return (
-    <section className="featured-projects-section" id="projects">
+    <section
+      ref={sectionRef}
+      className="featured-projects-section"
+      id="projects"
+    >
       <div className="featured-projects-inner">
+
         <header className="featured-projects-heading">
           <p className="featured-projects-kicker">Selected work</p>
+
           <h1>{bigProjects.title}</h1>
-          <p className="featured-projects-subtitle">{bigProjects.subtitle}</p>
+
+          <p className="featured-projects-subtitle">
+            {bigProjects.subtitle}
+          </p>
         </header>
 
         <div
@@ -168,40 +293,75 @@ export default function StartupProject() {
           onPointerCancel={onPointerCancel}
         >
           <div className="featured-project-stage">
+
             {visibleIndexes.map(index => {
               const project = projects[index];
+
               const isActive = index === activeIndex;
               const isLeaving = isActive && exitDirection !== 0;
               const isEntering = isActive && enterDirection !== 0;
+
               const cardClasses = [
                 "featured-project-card",
                 `featured-project-card--tone-${index + 1}`,
+
                 isActive ? "is-active" : "is-preview",
+
                 isActive && isDragging ? "is-dragging" : "",
-                isLeaving ? (exitDirection > 0 ? "is-leaving-left" : "is-leaving-right") : "",
-                isEntering ? (enterDirection > 0 ? "is-entering-right" : "is-entering-left") : ""
-              ].filter(Boolean).join(" ");
+
+                isLeaving
+                  ? exitDirection > 0
+                    ? "is-leaving-left"
+                    : "is-leaving-right"
+                  : "",
+
+                isEntering
+                  ? enterDirection > 0
+                    ? "is-entering-right"
+                    : "is-entering-left"
+                  : "",
+
+                isIntroPlaying && !isActive
+                  ? "is-scroll-intro-preview"
+                  : "",
+
+                isIntroPlaying && isActive
+                  ? "is-scroll-intro-active"
+                  : ""
+              ]
+                .filter(Boolean)
+                .join(" ");
 
               return (
                 <article
                   key={project.projectName}
                   className={cardClasses}
                   aria-hidden={!isActive}
-                  aria-label={`${project.projectName}, project ${index + 1} of ${projects.length}`}
+                  aria-label={`${project.projectName}, project ${index + 1
+                    } of ${projects.length}`}
                   style={{
                     "--drag-x": isActive ? `${dragX}px` : "0px",
-                    "--drag-rotate": isActive ? `${dragX * 0.025}deg` : "0deg"
+                    "--drag-rotate": isActive
+                      ? `${dragX * 0.025}deg`
+                      : "0deg"
                   }}
                 >
                   <div className="featured-project-image">
                     {project.image ? (
                       <img
                         src={project.image}
-                        alt={isActive ? `${project.projectName} preview` : ""}
+                        alt={
+                          isActive
+                            ? `${project.projectName} preview`
+                            : ""
+                        }
                         draggable="false"
                       />
                     ) : (
-                      <div className="featured-project-image-placeholder" aria-hidden="true">
+                      <div
+                        className="featured-project-image-placeholder"
+                        aria-hidden="true"
+                      >
                         {project.projectName}
                       </div>
                     )}
@@ -210,10 +370,18 @@ export default function StartupProject() {
                   <div className="featured-project-detail">
                     <p className="featured-project-number">
                       Project {String(index + 1).padStart(2, "0")}
-                      <span> / {String(projects.length).padStart(2, "0")}</span>
+                      <span>
+                        {" "}
+                        / {String(projects.length).padStart(2, "0")}
+                      </span>
                     </p>
+
                     <h2>{project.projectName}</h2>
-                    <p className="featured-project-description">{project.projectDesc}</p>
+
+                    <p className="featured-project-description">
+                      {project.projectDesc}
+                    </p>
+
                     {project.footerLink ? (
                       <div className="featured-project-links">
                         {project.footerLink.map(link => (
@@ -228,9 +396,16 @@ export default function StartupProject() {
                             target="_blank"
                             rel="noopener noreferrer"
                             tabIndex={isActive ? 0 : -1}
-                            aria-label={`${/github\.com/i.test(link.url) ? "GitHub" : "Live Demo"} for ${project.projectName} (opens in a new tab)`}
+                            aria-label={`${/github\.com/i.test(link.url)
+                                ? "GitHub"
+                                : "Live Demo"
+                              } for ${project.projectName
+                              } (opens in a new tab)`}
                           >
-                            {/github\.com/i.test(link.url) ? "GitHub" : "Live Demo"}
+                            {/github\.com/i.test(link.url)
+                              ? "GitHub"
+                              : "Live Demo"}
+
                             <span aria-hidden="true">&#8599;</span>
                           </a>
                         ))}
@@ -240,24 +415,47 @@ export default function StartupProject() {
                 </article>
               );
             })}
+
           </div>
 
-          <nav className="featured-project-controls" aria-label="Project navigation">
-            <button type="button" onClick={() => goToProject(-1)} aria-label="Previous project">
+          <nav
+            className="featured-project-controls"
+            aria-label="Project navigation"
+          >
+            <button
+              type="button"
+              onClick={() => goToProject(-1)}
+              aria-label="Previous project"
+            >
               <span aria-hidden="true">&#8592;</span>
             </button>
+
             <p aria-live="polite">
               {String(activeIndex + 1).padStart(2, "0")}
-              <span> / {String(projects.length).padStart(2, "0")}</span>
+
+              <span>
+                {" "}
+                / {String(projects.length).padStart(2, "0")}
+              </span>
+
               <span className="featured-project-sr-only">
                 Current project: {projects[activeIndex].projectName}
               </span>
             </p>
-            <button type="button" onClick={() => goToProject(1)} aria-label="Next project">
+
+            <button
+              type="button"
+              onClick={() => goToProject(1)}
+              aria-label="Next project"
+            >
               <span aria-hidden="true">&#8594;</span>
             </button>
           </nav>
-          <p className="featured-project-hint">Drag or swipe to explore&nbsp;&middot;&nbsp;use arrow keys</p>
+
+          <p className="featured-project-hint">
+            Drag or swipe to explore&nbsp;&middot;&nbsp;use arrow keys
+          </p>
+
         </div>
       </div>
     </section>

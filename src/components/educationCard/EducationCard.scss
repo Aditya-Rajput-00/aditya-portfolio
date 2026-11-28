@@ -1,62 +1,98 @@
 @import "../../_globalColor";
 
+/* =========================================
+   Education Card — Premium Dark Glass
+   Charcoal + Soft Lavender Theme
+========================================= */
+
 .education-card {
   position: relative;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   gap: 25px;
+
   padding: 34px 250px 34px 34px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-left: 3px solid rgba(139, 124, 255, 0.78);
+
+  /* Original Dark Glass Background */
+  background:
+    linear-gradient(145deg,
+      rgba(24, 26, 32, 0.88),
+      rgba(8, 10, 15, 0.94)) padding-box,
+    linear-gradient(135deg,
+      rgba(255, 255, 255, 0.18),
+      rgba(255, 255, 255, 0.04)) border-box;
+
+  border: 1px solid transparent;
+  border-left: 3px solid #C5A5FF;
   border-radius: 24px;
-  background: linear-gradient(
-    135deg,
-    rgba(108, 99, 255, 0.1),
-    rgba(19, 21, 31, 0.93) 34%,
-    rgba(13, 15, 22, 0.95)
-  );
-  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28),
-    0 0 30px rgba(108, 99, 255, 0.07),
-    inset 0 1px 0 rgba(255, 255, 255, 0.07);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
-  transition: transform 0.35s ease, border-color 0.35s ease,
+
+  box-shadow:
+    0 20px 55px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09);
+
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
     box-shadow 0.35s ease;
 }
+
+/* =========================================
+   Sitting Character
+========================================= */
 
 .education-character {
   position: absolute;
   z-index: 2;
   top: -130px;
   right: 24px;
+
   width: 190px;
   max-height: 285px;
+
   object-fit: contain;
   object-position: bottom;
   pointer-events: none;
-  filter: drop-shadow(0 12px 20px rgba(7, 6, 18, 0.5));
+
+  filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.5));
 }
+
+/* =========================================
+   Hover Effect
+========================================= */
 
 .education-card:hover {
   transform: translateY(-4px);
-  border-left-color: #8b7cff;
-  box-shadow: 0 22px 54px rgba(0, 0, 0, 0.34),
-    0 0 34px rgba(108, 99, 255, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.09);
+  border-left-color: #D8B4FE;
+
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.55),
+    0 0 24px rgba(192, 165, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
+
+/* Fallback for browsers without backdrop-filter */
 
 @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
   .education-card {
-    background: linear-gradient(135deg, #191a27, #101117 60%, #0d0f16);
+    background: linear-gradient(145deg,
+        #181a20,
+        #080a0f);
   }
 }
 
+/* =========================================
+   Bottom Accent Line
+========================================= */
+
 .education-card:hover+.education-card-border {
   background: linear-gradient(90deg,
-      #8b7cff,
-      rgba(139, 124, 255, 0.5),
-      rgba(255, 255, 255, 0.15));
+      #C5A5FF,
+      rgba(192, 165, 255, 0.5),
+      rgba(255, 255, 255, 0.12));
 }
 
 .education-card-border {
@@ -67,15 +103,17 @@
   border: none;
   border-radius: 50px;
 
-  background: linear-gradient(
-    90deg,
-    rgba(108, 99, 255, 0.74) 0%,
-    rgba(108, 99, 255, 0.24) 40%,
-    rgba(255, 255, 255, 0.06) 100%
-  );
+  background: linear-gradient(90deg,
+      rgba(192, 165, 255, 0.75) 0%,
+      rgba(192, 165, 255, 0.24) 40%,
+      rgba(255, 255, 255, 0.06) 100%);
 
   transition: all 0.35s ease;
 }
+
+/* =========================================
+   Education Heading
+========================================= */
 
 .education-head {
   display: flex;
@@ -84,36 +122,48 @@
 
 .education-text-school {
   margin: 0;
+
+  color: #F2F0FF;
   font-size: 32px;
   font-weight: 800;
   letter-spacing: -0.5px;
-  color: #fff;
   line-height: 1.2;
+
   text-overflow: clip;
   white-space: normal;
 }
 
+/* =========================================
+   University Image
+========================================= */
+
 .education-roundedimg {
   object-fit: cover;
+
   margin-right: 2rem;
   width: 6rem;
   height: 6rem;
 
   border-radius: 50%;
-  border: 3px solid rgba(108, 99, 255, 0.4);
+  border: 2px solid rgba(192, 165, 255, 0.35);
 
   box-shadow:
-    0 0 15px rgba(108, 99, 255, 0.25);
+    0 0 15px rgba(192, 165, 255, 0.12);
 
   transition: all 0.35s ease;
 }
 
 .education-card:hover .education-roundedimg {
   transform: scale(1.08);
-  border-color: #8b7cff;
+  border-color: #C5A5FF;
+
   box-shadow:
-    0 0 25px rgba(108, 99, 255, 0.45);
+    0 0 24px rgba(192, 165, 255, 0.25);
 }
+
+/* =========================================
+   Education Content
+========================================= */
 
 .education-card-right {
   width: 100%;
@@ -121,40 +171,58 @@
 }
 
 .education-text-subHeader {
-  color: #e5e3f4;
+  color: #E1E5ED;
   font-weight: 700;
   font-size: 19px;
-  margin: 0px;
+
+  margin: 0;
   padding-top: 0.8rem;
+
   line-height: normal;
 }
 
 .education-text-duration {
-  color: #c2bfd4;
+  color: #D8B4FE;
   font-size: 19px;
-  margin: 0px;
+
+  margin: 0;
   padding-top: 0.5rem;
 }
 
 .education-text-desc {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-  color: #d3d4df;
+
+  color: #C6CBD5;
   line-height: 1.7;
 }
+
+/* =========================================
+   Education Bullet Points
+========================================= */
 
 .education-text-bullets>ul {
   margin-top: 0.5rem;
   padding-left: 1.25rem;
-  color: #c5c7d2;
+
+  color: #BFC5D0;
   line-height: 1.7;
 }
 
 .education-text-bullets li::marker {
-  color: #a99fff;
+  color: #C5A5FF;
 }
 
-/* Media Query */
+/* Keep Text Background Transparent */
+
+.education-text-subHeader,
+.education-text-duration {
+  background: transparent !important;
+}
+
+/* =========================================
+   Responsive Design — Laptop & Tablet
+========================================= */
 
 @media (max-width: 1380px) {
   .education-card {
@@ -188,7 +256,7 @@
     width: 4rem;
     height: 4rem;
     margin-bottom: 0.5rem;
-    margin-right: 0px;
+    margin-right: 0;
   }
 
   .education-character {
@@ -199,10 +267,15 @@
   }
 }
 
+/* =========================================
+   Mobile Responsive
+========================================= */
+
 @media (max-width: 768px) {
   .education-card {
     text-align: center;
     align-items: center;
+
     padding: 24px 18px;
     border-radius: 20px;
   }
@@ -210,6 +283,7 @@
   .education-character {
     top: -80px;
     right: 4px;
+
     width: 116px;
     max-height: 174px;
   }
@@ -225,21 +299,41 @@
 
   .education-roundedimg {
     margin-top: 10px;
+
     width: 4rem;
     height: 4rem;
+
     margin-bottom: 1rem;
     margin-right: 0;
   }
 
   .education-text-bullets>ul {
     max-width: 100%;
+
     margin: 0.5rem auto 0;
     padding-left: 1.25rem;
+
     text-align: left;
   }
 }
 
-.education-text-subHeader,
-.education-text-duration {
-  background: transparent !important;
+/* =========================================
+   Accessibility
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .education-card,
+  .education-roundedimg,
+  .education-card-border {
+    transition: none;
+  }
+
+  .education-card:hover {
+    transform: none;
+  }
+
+  .education-card:hover .education-roundedimg {
+    transform: none;
+  }
 }

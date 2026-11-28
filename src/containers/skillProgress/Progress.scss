@@ -1,3 +1,8 @@
+/* =========================================
+   Proficiency Section
+   Dark Glass + Soft Lavender Accents
+========================================= */
+
 .proficiency-section {
   box-sizing: border-box;
   width: min(1280px, calc(100% - 32px));
@@ -6,6 +11,8 @@
   color: #eef0fb;
 }
 
+/* Main Layout */
+
 .proficiency-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
@@ -13,10 +20,12 @@
   gap: clamp(28px, 4vw, 56px);
 }
 
-.proficiency-layout > * {
+.proficiency-layout>* {
   min-width: 0;
   align-self: center;
 }
+
+/* Illustration */
 
 .proficiency-visual {
   display: flex;
@@ -27,8 +36,8 @@
   opacity: 0.88;
 }
 
-.proficiency-visual > img,
-.proficiency-visual > div {
+.proficiency-visual>img,
+.proficiency-visual>div {
   display: block;
   width: 100%;
   max-width: 480px;
@@ -41,32 +50,50 @@
   height: auto;
 }
 
+/* Content */
+
 .proficiency-content {
   min-width: 0;
 }
 
 .proficiency-heading {
   margin: 0 0 16px;
-  color: #f2efff;
+  color: #f2f0ff;
   font-size: clamp(2rem, 3.4vw, 2.8rem);
   font-weight: 650;
   letter-spacing: -0.045em;
   line-height: 1.1;
 }
 
+/* =========================================
+   Original Premium Dark Glass Panel
+========================================= */
+
 .proficiency-panel {
   box-sizing: border-box;
   width: 100%;
   overflow: hidden;
-  background: linear-gradient(145deg, rgba(21, 20, 39, 0.8), rgba(11, 13, 24, 0.86));
-  border: 1px solid rgba(151, 130, 239, 0.23);
-  border-radius: 16px;
-  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22),
-    0 0 32px rgba(110, 83, 223, 0.07),
-    inset 0 1px 0 rgba(230, 223, 255, 0.05);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
+
+  background:
+    linear-gradient(145deg,
+      rgba(24, 26, 32, 0.88),
+      rgba(8, 10, 15, 0.94)) padding-box,
+    linear-gradient(135deg,
+      rgba(255, 255, 255, 0.18),
+      rgba(255, 255, 255, 0.04)) border-box;
+
+  border: 1px solid transparent;
+  border-radius: 18px;
+
+  box-shadow:
+    0 20px 55px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09);
+
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
 }
+
+/* Two Column Layout */
 
 .proficiency-columns {
   display: grid;
@@ -80,18 +107,22 @@
   list-style: none;
 }
 
-.proficiency-column + .proficiency-column {
-  border-left: 1px solid rgba(169, 157, 221, 0.13);
+.proficiency-column+.proficiency-column {
+  border-left: 1px solid rgba(255, 255, 255, 0.09);
 }
+
+/* Individual Skills */
 
 .proficiency-skill {
   min-width: 0;
   padding: 8px 0 9px;
 }
 
-.proficiency-skill + .proficiency-skill {
-  border-top: 1px solid rgba(169, 157, 221, 0.1);
+.proficiency-skill+.proficiency-skill {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
+
+/* Skill Names */
 
 .proficiency-skill-heading {
   display: flex;
@@ -99,26 +130,35 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  color: #d8d9e8;
+
+  color: #E2DFEA;
   font-size: 0.78rem;
   font-weight: 550;
   line-height: 1.35;
 }
 
-.proficiency-skill-heading > span:first-child {
+.proficiency-skill-heading>span:first-child {
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
+/* Light Lavender Percentages */
+
 .proficiency-value {
   flex: 0 0 auto;
-  color: #c4b4ff;
+  color: #DCC5FF;
   font-size: 0.75rem;
   font-variant-numeric: tabular-nums;
-  font-weight: 650;
+  font-weight: 700;
+
+  transition: color 180ms ease;
 }
+
+/* =========================================
+   Soft Lavender Progress Bars
+========================================= */
 
 .proficiency-meter {
   box-sizing: border-box;
@@ -126,18 +166,43 @@
   height: 6px;
   margin-top: 7px;
   overflow: hidden;
-  background: rgba(155, 160, 186, 0.15);
-  border: 1px solid rgba(207, 204, 231, 0.08);
+
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 999px;
 }
 
-.proficiency-meter > span {
+.proficiency-meter>span {
   display: block;
   height: 100%;
-  background: linear-gradient(90deg, #7558dc, #a78bfa 68%, #c2a4ff);
+
+  background: linear-gradient(90deg,
+      #A987F5 0%,
+      #C2A5FF 65%,
+      #DEC5FF 100%);
+
   border-radius: inherit;
-  box-shadow: 0 0 10px rgba(150, 119, 255, 0.27);
+
+  box-shadow: 0 0 8px rgba(194, 165, 255, 0.24);
+
+  transition:
+    width 500ms ease,
+    box-shadow 180ms ease;
 }
+
+/* Subtle Hover */
+
+.proficiency-skill:hover .proficiency-value {
+  color: #E9D5FF;
+}
+
+.proficiency-skill:hover .proficiency-meter>span {
+  box-shadow: 0 0 11px rgba(194, 165, 255, 0.42);
+}
+
+/* =========================================
+   Tablet Responsive
+========================================= */
 
 @media (max-width: 900px) {
   .proficiency-layout {
@@ -150,8 +215,8 @@
     margin: 8px auto 0;
   }
 
-  .proficiency-visual > img,
-  .proficiency-visual > div {
+  .proficiency-visual>img,
+  .proficiency-visual>div {
     max-width: 300px;
   }
 
@@ -159,6 +224,10 @@
     text-align: center;
   }
 }
+
+/* =========================================
+   Mobile Responsive
+========================================= */
 
 @media (max-width: 560px) {
   .proficiency-section {
@@ -180,8 +249,8 @@
     padding: 9px 16px;
   }
 
-  .proficiency-column + .proficiency-column {
-    border-top: 1px solid rgba(169, 157, 221, 0.13);
+  .proficiency-column+.proficiency-column {
+    border-top: 1px solid rgba(255, 255, 255, 0.09);
     border-left: 0;
   }
 
@@ -189,6 +258,8 @@
     padding: 8px 0 10px;
   }
 }
+
+/* Small Mobile */
 
 @media (max-width: 360px) {
   .proficiency-column {
@@ -202,8 +273,12 @@
   }
 }
 
+/* Accessibility */
+
 @media (prefers-reduced-motion: reduce) {
-  .proficiency-meter > span {
+
+  .proficiency-meter>span,
+  .proficiency-value {
     transition: none;
   }
 }
